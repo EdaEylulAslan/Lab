@@ -73,46 +73,41 @@ public class Player {
         }
     }
 
-    /*
-     * TODO: removes and returns the tile in given index
-     */
     public Tile getAndRemoveTile(int index) {
-        return null;
+        Tile t = playerTiles[index];
+        for(int i=index+1;i<numberOfTiles;i++)
+            playerTiles[i]=playerTiles[i-1];
+        numberOfTiles--;
+        return t;
     }
 
-    /*
-     * TODO: adds the given tile at the end of playerTiles array, should also
-     * update numberOfTiles accordingly. Make sure the player does not try to
-     * have more than 15 tiles at a time
-     */
     public void addTile(Tile t) {
-
-    }
-
-    /*
-     * TODO: uses bubble sort to sort playerTiles in increasing color and value
-     * value order: 1 < 2 < ... < 12 < 13
-     * color order: Y < B < R < K
-     * color is more important in this ordering, a sorted example:
-     * 3Y 3Y 6Y 7Y 1B 2B 3B 3B 10R 11R 12R 2K 4K 5K
-     * you can use compareToColorFirst method in Tile class for comparing
-     * you are allowed to use Collections.sort method
-     */
-    public void sortTilesColorFirst() {
+        playerTiles[numberOfTiles++]=t;
         
+        if(numberOfTiles>15) System.out.print("too many tiles!");
     }
 
-    /*
-     * TODO: uses bubble sort to sort playerTiles in increasing value and color
-     * value order: 1 < 2 < ... < 12 < 13
-     * color order: Y < B < R < K
-     * value is more important in this ordering, a sorted example:
-     * 1B 2B 2K 3Y 3Y 3B 3B 4K 5K 6Y 7Y 10R 11R 12R
-     * you can use compareToValueFirst method in Tile class for comparing
-     * you are allowed to use Collections.sort method
-     */
-    public void sortTilesValueFirst() {
+    public void sortTilesColorFirst() {
+        Tile s;
+        for(int i=0;i<numberOfTiles;i++)
+            for(int j=i+1;j<numberOfTiles;j++)
+                if(playerTiles[i].compareToColorFirst(playerTiles[j])<0){
+                    s=playerTiles[i];
+                    playerTiles[i]=playerTiles[j];
+                    playerTiles[j]=s;
+                }
+            
+    }
 
+    public void sortTilesValueFirst() {
+        Tile s;
+        for(int i=0;i<numberOfTiles;i++)
+            for(int j=i+1;j<numberOfTiles;j++)
+                if(playerTiles[i].compareToValueFirst(playerTiles[j])<0){
+                    s=playerTiles[i];
+                    playerTiles[i]=playerTiles[j];
+                    playerTiles[j]=s;
+                }
     }
 
     public int findPositionOfTile(Tile t) {

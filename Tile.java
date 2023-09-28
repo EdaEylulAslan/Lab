@@ -14,12 +14,8 @@ public class Tile {
         this.color = color;
     }
 
-    /*
-     * TODO: should check if the given tile t and this tile contain the same color and value
-     * return true if they are matching, false otherwise
-     */
     public boolean matchingTiles(Tile t) {
-        return false;
+        return t.color == color ;
     }
 
     public int compareToColorFirst(Tile t) {
